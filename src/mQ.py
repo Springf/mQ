@@ -6,7 +6,7 @@ import mG_p4
 
 
 class MyApplication(tk.Tk):
-    """Hello World Main Application"""
+    """Hell Training Main Application"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
