@@ -11,7 +11,7 @@ class MyApplication(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         windll.shcore.SetProcessDpiAwareness(1)
-        self.title("Math Fun")
+        self.title("Math is Fun")
         self.geometry("2048x1536")
         self.resizable(width=False, height=False)
         mv = mView(self)
