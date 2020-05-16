@@ -28,7 +28,7 @@ class MyApplication(tk.Tk):
 
 
 if __name__ == '__main__':
-    while True:
-        mG_p4.pick()
+    # while True:
+    #     mG_p4.pick()
     app = MyApplication()
     app.mainloop()
