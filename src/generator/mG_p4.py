@@ -1,62 +1,76 @@
+from decimal import Decimal
+import config
+from entity.question import question
 from random import randint, random
 from fractions import Fraction
 import sys
 sys.path.insert(1, '../')
-from entity.question import question
-import config
 
 # collection of arithmatic questions for Primary 4
 
-picker = ('decimalAdd', 'decimalMinus', 'decimalMultiply', 'decimalDivide', 'factionAdd')
+picker = ('decimal_add', 'decimal_minus', 'decimal_multiply',
+          'decimal_divide', 'faction_add')
 db = config.DATABASE_CONFIG['dbname']
 level = 4
+
+
 def pick():
     print(len(picker))
     p = randint(0, len(picker)-1)
     globals()[picker[p]]()
 
 
-def decimalAdd():
-    n1 = round(random() * 101, 3)
-    n2 = round(random() * 101, 2)
-    ans = input(f'{n1} + {n2} = ')
-    print(float(ans) == n1 + n2)
-    print(n1+n2)
+def gen_rand_decimal(whole, precision):
+    min = 10 ** (whole + precision-1)
+    max = 10 ** (whole + precision)
+    p = 10 ** precision
+    return Decimal(randint(min, max))/p
 
 
-def decimalMinus():
-    n1 = round(random() * 101, 3)
-    n2 = round(random() * 101, 2)
+def decimal_add():
+    n1 = gen_rand_decimal(2, 3)
+    n2 = gen_rand_decimal(3, 2)
+    ans = n1 + n2
+    q = question(db, None, f'{n1} + {n2}', f'{ans}', 'decmial', level, '=')
+    q.update()
+    return q
+
+
+def decimal_minus():
+    n1 = gen_rand_decimal(3, 3)
+    n2 = gen_rand_decimal(3, 2)
     if n1 < n2:
         tmp = n1
         n1 = n2
         n2 = tmp
-    ans = input(f'{n1} - {n2} = ')
-    print(float(ans) == n1 - n2)
-    print(n1-n2)
+    ans = n1 - n2
+    q = question(db, None, f'{n1} - {n2}', f'{ans}', 'decmial', level, '=')
+    q.update()
+    return q
 
 
-def decimalMultiply():
-    n1 = round(random() * 101, 3)
-    n2 = round(random() * 101, 2)
-    ans = input(f'{n1:.3f} * {n2:.2f} = ')
-    print(float(ans) == n1 * n2)
-    print(n1*n2)
+def decimal_multiply():
+    n1 = gen_rand_decimal(1, 3)
+    n2 = gen_rand_decimal(1, 2)
+    ans = n1 * n2
+    q = question(db, None, f'{n1} * {n2}', f'{ans}', 'decmial', level, '=')
+    q.update()
+    return q
 
 
-def decimalDivide():
-    n1 = round(random() * 101, 3)
-    n2 = randint(2, 12)
-    n3 = n1 * n2
-    ans = input(f'{n3:.3f} / {n2} = ')
-    print(float(ans) == n1)
-    print(n1)
+def decimal_divide():
+    ans = gen_rand_decimal(3, 2)
+    n1 = randint(2, 12)
+    n2 = n1 * ans
+    q = question(db, None, f'{n2} / {n1}', f'{ans}', 'decmial', level, '=')
+    q.update()
+    return q
 
-def factionAdd():
-    n1 = Fraction(randint(1,9), randint(9,20))
-    n2 = Fraction(randint(1,9), randint(9,20))
+
+def faction_add():
+    n1 = Fraction(randint(1, 9), randint(9, 20))
+    n2 = Fraction(randint(1, 9), randint(9, 20))
     ans = n1 + n2
-    q = question(db, None, f'{n1} + {n2}', f'{ans}','fraction',level,'=')
-    #q.update()
-    print(q.body)
+    q = question(db, None, f'{n1} + {n2}', f'{ans}', 'fraction', level, '=')
+    q.update()
     return q

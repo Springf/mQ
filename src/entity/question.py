@@ -1,10 +1,14 @@
 import sqlite3
 from fractions import Fraction
+from decimal import Decimal
+
+
 class question:
     """
     A question has a body, an answer, a difficulty level and a prompt;
     optionally it can has the variables in the body, the actual value in args
     """
+
     def __init__(self, db, id, body, answer, answer_type, level, prompt, variable=None, variable_id=None):
         self.db = db
         self.id = id
@@ -13,9 +17,12 @@ class question:
             self.answer = int(answer)
         elif answer_type == 'float':
             self.answer = float(answer)
+        elif answer_type == 'decimal':
+            self.answer = Decimal(answer)
         elif answer_type == 'fraction':
             self.answer = Fraction(answer)
-        else: self.answer = answer
+        else:
+            self.answer = answer
         self.answer_type = answer_type
         self.level = level
         self.prompt = prompt
@@ -50,7 +57,7 @@ class question:
             conn.close()
             self.id = new_id
             return new_id
-    
+
     @staticmethod
     def populate(db, id):
         if id is not None:
