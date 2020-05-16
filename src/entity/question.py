@@ -1,5 +1,5 @@
 import sqlite3
-
+from fractions import Fraction
 class question:
     """
     A question has a body, an answer, a difficulty level and a prompt;
@@ -13,6 +13,8 @@ class question:
             self.answer = int(answer)
         elif answer_type == 'float':
             self.answer = float(answer)
+        elif answer_type == 'fraction':
+            self.answer = Fraction(answer)
         else: self.answer = answer
         self.answer_type = answer_type
         self.level = level
@@ -46,6 +48,7 @@ class question:
                 cur.execute(insert_variable_sql)
             conn.commit()
             conn.close()
+            self.id = new_id
             return new_id
     
     @staticmethod

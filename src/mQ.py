@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from mView import mView
 from ctypes import windll
-import mG_p4
+from generator import mG_p4
 
 
 class MyApplication(tk.Tk):
@@ -28,7 +28,7 @@ class MyApplication(tk.Tk):
 
 
 if __name__ == '__main__':
-    # while True:
-    #     mG_p4.pick()
+    while True:
+        mG_p4.pick()
     app = MyApplication()
     app.mainloop()
