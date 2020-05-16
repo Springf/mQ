@@ -9,7 +9,11 @@ class question:
         self.db = db
         self.id = id
         self.body = body
-        self.answer = answer
+        if answer_type == 'int':
+            self.answer = int(answer)
+        elif answer_type == 'float':
+            self.answer = float(answer)
+        else: self.answer = answer
         self.answer_type = answer_type
         self.level = level
         self.prompt = prompt
@@ -18,18 +22,6 @@ class question:
             self.variable_id = variable_id
         else:
             self.variable = None
-    def __init__(self, db, id):
-        
-
-    def populate(self):
-        if self.id is not None:
-            selct_sql = f"""SELECT q.id, q.body, q.answer, q.answer_type, q.level, q.prompt
-            ,v.variable, v.variable_id 
-            FROM question q LEFT JOIN variable v ON q.id = v.question_id
-            """
-            conn = sqlite3.Connection(self.db)
-            cur = conn.cursor()
-            cur.execute(insert_sql)
 
     def get_body(self):
         if self.variable is not None:
@@ -45,11 +37,29 @@ class question:
             conn = sqlite3.Connection(self.db)
             cur = conn.cursor()
             cur.execute(insert_sql)
-            new_id = cur.execute(id_sql).fetchone()
+            new_id = cur.execute(id_sql).fetchone()[0]
             if self.variable is not None and self.variable_id is None:
                 insert_variable_sql = f"""INSERT INTO variable (question_id, variable, created_datetime)
-                VALUES ({new_id}, {','.join(self.variable)},datetime('now', 'localtime'))
+                VALUES ({new_id}, '{','.join(self.variable)}',datetime('now', 'localtime'))
                 """
+                print(insert_variable_sql)
                 cur.execute(insert_variable_sql)
             conn.commit()
+            conn.close()
+            return new_id
+    
+    @staticmethod
+    def populate(db, id):
+        if id is not None:
+            select_sql = f"""SELECT q.id, q.body, q.answer, q.answer_type, q.level, q.prompt
+            ,v.variable, v.id as variable_id 
+            FROM question q LEFT JOIN variable v ON q.id = v.question_id
+            WHERE q.id = {id} 
+            """
+            print(select_sql)
+            conn = sqlite3.Connection(db)
+            cur = conn.cursor()
+            results = cur.execute(select_sql).fetchall()
+            for r in results:
+                yield question(db, r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7])
             conn.close()
