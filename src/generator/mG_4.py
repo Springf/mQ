@@ -1,5 +1,4 @@
 from decimal import Decimal
-import config
 from entity.question import question
 from random import randint, random
 from fractions import Fraction
@@ -10,12 +9,12 @@ sys.path.insert(1, '../')
 
 picker = ('decimal_add', 'decimal_minus', 'decimal_multiply',
           'decimal_divide', 'faction_add')
-db = config.DATABASE_CONFIG['dbname']
 level = 4
+db = None
 
 
-def pick():
-    print(len(picker))
+def pick(dbname):
+    db = dbname
     p = randint(0, len(picker)-1)
     return globals()[picker[p]]()
 

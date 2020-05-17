@@ -29,6 +29,7 @@ CREATE TABLE "test_questions" (
 	"test_id"	INTEGER NOT NULL,
 	"question_id"	INTEGER NOT NULL,
 	"variable_id"	INTEGER,
+	"order"	INTEGER NOT NULL,
 	"mark"	INTEGER NOT NULL,
 	"answer"	TEXT,
 	"correct"	INTEGER,
@@ -36,4 +37,4 @@ CREATE TABLE "test_questions" (
 	"last_updated"	INTEGER,
 	"time_spent"	INTEGER,
 	PRIMARY KEY("test_id","question_id")
-);
+)

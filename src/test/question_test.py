@@ -85,7 +85,7 @@ def test_load_question_float_with_var():
 @pytest.fixture(scope="module", autouse=True)
 def clean_up():
     yield
-    conn = sqlite3.Connection(db)
+    conn = sqlite3.connect(db)
     cur = conn.cursor()
     cur.execute("delete from question")
     cur.execute("delete from variable")

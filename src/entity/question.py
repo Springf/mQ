@@ -43,7 +43,7 @@ class question:
                 VALUES ('{self.body}', '{self.answer}', '{self.answer_type}', {self.level}, '{self.prompt}',datetime('now', 'localtime'))
                 """
             id_sql = 'select last_insert_rowid()'
-            conn = sqlite3.Connection(self.db)
+            conn = sqlite3.connect(self.db)
             cur = conn.cursor()
             cur.execute(insert_sql)
             new_id = cur.execute(id_sql).fetchone()[0]
@@ -67,7 +67,7 @@ class question:
             WHERE q.id = {id} 
             """
             print(select_sql)
-            conn = sqlite3.Connection(db)
+            conn = sqlite3.connect(db)
             cur = conn.cursor()
             results = cur.execute(select_sql).fetchall()
             for r in results:
