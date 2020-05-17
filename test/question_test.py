@@ -1,6 +1,6 @@
 from . import config
 import sqlite3
-from ..entity.question import question
+from ..src.entity.question import question
 import pytest
 
 db = config.DATABASE_CONFIG['dbname']

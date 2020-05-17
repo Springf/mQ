@@ -38,7 +38,7 @@ class test:
 
     def pick_a_question(self, level):
         rand_gen = self.test_generators[level]
-        gen = importlib.import_module(rand_gen, package='src.generator')
+        gen = importlib.import_module(rand_gen, package='mQ.src.generator')
         q = gen.pick()
         return q
 

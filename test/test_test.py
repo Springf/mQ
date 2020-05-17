@@ -1,7 +1,7 @@
 import sqlite3
 from . import config
 import pytest
-from ..entity.test import test
+from ..src.entity.test import test
 
 db = config.DATABASE_CONFIG['dbname']
 
