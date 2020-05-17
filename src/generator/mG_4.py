@@ -17,7 +17,7 @@ level = 4
 def pick():
     print(len(picker))
     p = randint(0, len(picker)-1)
-    globals()[picker[p]]()
+    return globals()[picker[p]]()
 
 
 def gen_rand_decimal(whole, precision):
