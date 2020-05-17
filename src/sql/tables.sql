@@ -37,4 +37,4 @@ CREATE TABLE "test_questions" (
 	"last_updated"	INTEGER,
 	"time_spent"	INTEGER,
 	PRIMARY KEY("test_id","question_id")
-)
+);
