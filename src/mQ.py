@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from mView import mView
 from ctypes import windll
-from generator import mG_p4
+#from generator import mG_p4
 
 
 class MyApplication(tk.Tk):
@@ -13,11 +13,11 @@ class MyApplication(tk.Tk):
         windll.shcore.SetProcessDpiAwareness(1)
         self.title("Math is Fun")
         self.geometry("2048x1536")
-        self.resizable(width=False, height=False)
+        #self.resizable(width=False, height=False)
         mv = mView(self)
-        mv.grid(sticky=(tk.E + tk.W + tk.N + tk.S))
+        #mv.grid(sticky=(tk.E + tk.W + tk.N + tk.S))
         self.columnconfigure(0, weight=1)
-        mv.grid(2, 2)
+        mv.grid(row=0, column=0, sticky=(tk.E + tk.W + tk.N + tk.S))
 
     def generate_timer(self, initial_timer_seconds: int):
         hh = initial_timer_seconds / 3600
@@ -28,7 +28,7 @@ class MyApplication(tk.Tk):
 
 
 if __name__ == '__main__':
-    while True:
-        mG_p4.pick()
+    # while True:
+    #     mG_p4.pick()
     app = MyApplication()
     app.mainloop()
