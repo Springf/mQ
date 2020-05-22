@@ -36,6 +36,22 @@ class question:
             return self.body.format(*self.variable)
         return self.body
 
+    def test_answer(self, answer):
+        try:
+            if self.answer_type == 'int':
+                return self.answer == int(answer)
+            elif self.answer_type == 'float':
+                return self.answer == float(answer)
+            elif self.answer_type == 'decimal':
+                return self.answer == Decimal(answer)
+            elif self.answer_type == 'fraction':
+                return self.answer == Fraction(answer)
+            else:
+                return self.answer == answer
+        except:
+            return 0
+
+
     def update(self, conn):
         if self.id is None:
             insert_sql = f"""INSERT INTO question (body, answer, answer_type, level, prompt, created_datetime)

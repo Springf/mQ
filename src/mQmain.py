@@ -13,8 +13,7 @@ class MyApplication(tk.Tk):
         windll.shcore.SetProcessDpiAwareness(1)
         
         self.title("Math is Fun")
-        self.geometry("1024x1024")
-        #self.resizable(width=False, height=False)
+        self.geometry("1024x1024")   
             
         new_test = test(getpass.getuser(), 4, 30, 1200)
         mv = mView(self, new_test)

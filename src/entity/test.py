@@ -18,7 +18,7 @@ the one who take the test
 
 class test:
     test_generators = ('generator.mG_1', 'generator.mG_2'
-    , 'generator.mG_4', 'generator.mG_4', 'generator.mG_4')
+    , 'generator.mG_3', 'generator.mG_4', 'generator.mG_4')
 
     def __init__(self, taker, level, num_of_questions, time_limit):
         self.taker = taker
@@ -35,6 +35,12 @@ class test:
         new_id = cur.execute(id_sql).fetchone()[0]
         self.id = new_id
         return new_id
+    
+    def start_test(self, conn):
+        cur = conn.cursor()
+        cur.execute(f"""update test set start_datetime = datetime('now','localtime')
+                        where id={self.id}
+                    """)
 
     def pick_a_question(self, level):
         rand_gen = self.test_generators[level]
@@ -71,5 +77,9 @@ class test:
     def finish_test(self, conn):
         cur = conn.cursor()
         cur.execute(f"""update test set end_datetime = datetime('now','localtime')
-                        where id = {self.id})
+                        where id = {self.id}
                     """)
+        score = cur.execute(f"""select sum(tq.correct*tq.mark) from test t join test_questions tq on t.id = tq.test_id
+                        where t.id = {self.id}
+                    """).fetchone()[0]
+        return score
