@@ -1,9 +1,7 @@
 from decimal import Decimal
-from ..entity.question import question
+from entity.question import question
 from random import randint, random
 from fractions import Fraction
-import sys
-sys.path.insert(1, '../')
 
 # collection of arithmatic questions for Primary 4
 

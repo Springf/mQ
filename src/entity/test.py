@@ -17,8 +17,8 @@ the one who take the test
 
 
 class test:
-    test_generators = ('..generator,mG_1', '..generator.mG_2'
-    , '..generator.mG_4', '..generator.mG_4', '..generator.mG_4')
+    test_generators = ('generator.mG_1', 'generator.mG_2'
+    , 'generator.mG_4', 'generator.mG_4', 'generator.mG_4')
 
     def __init__(self, taker, level, num_of_questions, time_limit):
         self.taker = taker
@@ -38,31 +38,38 @@ class test:
 
     def pick_a_question(self, level):
         rand_gen = self.test_generators[level]
-        gen = importlib.import_module(rand_gen, package='mQ.src.generator')
+        gen = importlib.import_module(f'{rand_gen}')
         q = gen.pick()
         return q
 
     def generate_test(self, conn):
-        self.list_of_quetions = dict()
+        self.list_of_questions = dict()
         cur = conn.cursor()
         for i in range(0, self.num_of_questions):
             # calculate mark based on level - TODO
             mark = 1
             q = self.pick_a_question(randint(self.level - 2, self.level))
             q.update(conn)
-            self.list_of_quetions[i] = q
+            self.list_of_questions[i] = q
             cur.execute(f"""INSERT INTO test_questions (test_id, question_id, [order], mark)
                         VALUES ({self.id}, {q.id}, {i}, {mark})
                     """)
     
-    def start_test_question(self, conn, question_id, start_time):
+    def start_test_question(self, conn, question_id):
         cur = conn.cursor()
-        cur.execute(f"""UPDATE test_questions set start_datetime = '{start_time}'
-                        where test_id={self.test_id} and question_id={question_id}
+        cur.execute(f"""UPDATE test_questions set start_datetime = datetime('now','localtime')
+                        where test_id={self.id} and question_id={question_id}
                     """)
 
-    def update_test_question(question_id, answer, correct, update_time, time_spent):
+    def update_test_question(self, conn, question_id, answer, correct, time_spent):
         cur = conn.cursor()
-        cur.execute(f"""UPDATE test_questions set answer = '{answer}', correct = {correct}, last_updated='{update_time}', time_spent={time_spent}
-                        where test_id={self.test_id} and question_id={question_id}
+        cur.execute(f"""UPDATE test_questions set answer = '{answer}', correct = {correct}
+                    , last_updated=datetime('now','localtime'), time_spent={time_spent}
+                        where test_id={self.id} and question_id={question_id}
+                    """)
+    
+    def finish_test(self, conn):
+        cur = conn.cursor()
+        cur.execute(f"""update test set end_datetime = datetime('now','localtime')
+                        where id = {self.id})
                     """)

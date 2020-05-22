@@ -5,9 +5,6 @@ from ctypes import windll
 from entity.test import test
 import getpass
 
-
-
-
 class MyApplication(tk.Tk):
     """Hell Training Main Application"""
 
@@ -20,7 +17,7 @@ class MyApplication(tk.Tk):
         #self.resizable(width=False, height=False)
             
         new_test = test(getpass.getuser(), 4, 30, 1200)
-        mv = mView(self)
+        mv = mView(self, new_test)
 
         #mv.grid(sticky=(tk.E + tk.W + tk.N + tk.S))
         self.columnconfigure(0, weight=1)
