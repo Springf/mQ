@@ -27,7 +27,7 @@ def decimal_add():
     n1 = gen_rand_decimal(2, 3)
     n2 = gen_rand_decimal(3, 2)
     ans = n1 + n2
-    q = question(None, f'{n1} + {n2}', f'{ans}', 'decmial', level, '=')
+    q = question(None, f'{n1} + {n2} =', f'{ans}', 'decmial', level, 'Express your answer in Decimal')
     return q
 
 
@@ -39,7 +39,7 @@ def decimal_minus():
         n1 = n2
         n2 = tmp
     ans = n1 - n2
-    q = question(None, f'{n1} - {n2}', f'{ans}', 'decmial', level, '=')
+    q = question(None, f'{n1} - {n2} =', f'{ans}', 'decmial', level, 'Express your answer in Decimal')
     return q
 
 
@@ -47,7 +47,7 @@ def decimal_multiply():
     n1 = gen_rand_decimal(1, 3)
     n2 = gen_rand_decimal(1, 2)
     ans = n1 * n2
-    q = question(None, f'{n1} * {n2}', f'{ans}', 'decmial', level, '=')
+    q = question(None, f'{n1} * {n2} =', f'{ans}', 'decmial', level, 'Express your answer in Decimal')
     return q
 
 
@@ -55,7 +55,7 @@ def decimal_divide():
     ans = gen_rand_decimal(3, 2)
     n1 = randint(2, 12)
     n2 = n1 * ans
-    q = question(None, f'{n2} / {n1}', f'{ans}', 'decmial', level, '=')
+    q = question(None, f'{n2} / {n1} =', f'{ans}', 'decmial', level, 'Express your answer in Decimal')
     return q
 
 
@@ -63,5 +63,5 @@ def faction_add():
     n1 = Fraction(randint(1, 9), randint(9, 20))
     n2 = Fraction(randint(1, 9), randint(9, 20))
     ans = n1 + n2
-    q = question(None, f'{n1} + {n2}', f'{ans}', 'fraction', level, '=')
+    q = question(None, f'{n1} + {n2} =', f'{ans}', 'fraction', level, 'Express your answer in Simplified Fraction')
     return q

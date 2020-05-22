@@ -54,3 +54,15 @@ class test:
             cur.execute(f"""INSERT INTO test_questions (test_id, question_id, [order], mark)
                         VALUES ({self.id}, {q.id}, {i}, {mark})
                     """)
+    
+    def start_test_question(self, conn, question_id, start_time):
+        cur = conn.cursor()
+        cur.execute(f"""UPDATE test_questions set start_datetime = '{start_time}'
+                        where test_id={self.test_id} and question_id={question_id}
+                    """)
+
+    def update_test_question(question_id, answer, correct, update_time, time_spent):
+        cur = conn.cursor()
+        cur.execute(f"""UPDATE test_questions set answer = '{answer}', correct = {correct}, last_updated='{update_time}', time_spent={time_spent}
+                        where test_id={self.test_id} and question_id={question_id}
+                    """)
