@@ -3,14 +3,14 @@ from entity.question import question
 from random import randint, random
 from fractions import Fraction
 
-# collection of arithmatic questions for Primary 4
+# collection of arithmatic questions for Primary 5
 
 operators = ('+','-','*','/')
 picker = ('gen_rand_equation')
 level = 5
 
 def pick():
-    return gen_rand_equation(4)
+    return gen_rand_equation(5)
     # p = randint(0, len(picker)-1)
     # return globals()[picker[p]](4)
 
@@ -24,7 +24,7 @@ def gen_rand_decimal(whole, precision):
 def gen_rand_int(whole):
     min = 10 ** (whole)
     max = 10 ** (whole + 1)
-    return randint(min, max)
+    return randint(min+1, max+1)
 
 # def gen_rand_pair(operator)
 #     x = gen_rand_int(2)
@@ -40,11 +40,11 @@ def recur_gen_rand_equation(p):
         return f'{gen_rand_int(1)}'
     operator = operators[randint(0,3)]
     if operator == '+':
-        n1 = gen_rand_int(2)
+        n1 = gen_rand_int(1)
         n2 = recur_gen_rand_equation(p-1)
         return f'{n1}+{n2}'
     elif operator == '-':
-        n1 = gen_rand_int(1)
+        n1 = gen_rand_int(0)
         n2 = eval(recur_gen_rand_equation(p-1))
         if n1 < n2:
             tmp = n1
@@ -52,7 +52,7 @@ def recur_gen_rand_equation(p):
             n2 = tmp
         return f'{n1}-{n2}'
     elif operator == '*':
-        n1 = gen_rand_int(1)
+        n1 = gen_rand_int(0)
         n2 = recur_gen_rand_equation(p-1)
         if p>2:
             return f'{n1}*({n2})'

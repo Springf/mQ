@@ -15,7 +15,7 @@ class MyApplication(tk.Tk):
         self.title("Math is Fun")
         self.geometry("1024x1024")   
             
-        new_test = test(getpass.getuser(), 4, 10, 1200)
+        new_test = test(getpass.getuser(), 4, 30, 1200)
         mv = mView(self, new_test)
 
         #mv.grid(sticky=(tk.E + tk.W + tk.N + tk.S))

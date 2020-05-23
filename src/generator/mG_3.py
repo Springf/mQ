@@ -2,7 +2,7 @@ from decimal import Decimal
 from entity.question import question
 from random import randint, random
 
-# collection of arithmatic questions for Primary 4
+# collection of arithmatic questions for Primary 3
 
 picker = ('integer_add', 'integer_minus', 'integer_multiply',
           'integer_divide')

@@ -18,7 +18,7 @@ the one who take the test
 
 class test:
     test_generators = ('generator.mG_1', 'generator.mG_2'
-    , 'generator.mG_5', 'generator.mG_5', 'generator.mG_5')
+    , 'generator.mG_5', 'generator.mG_4', 'generator.mG_5')
 
     def __init__(self, taker, level, num_of_questions, time_limit):
         self.taker = taker
