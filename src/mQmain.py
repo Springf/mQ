@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 from mView import mView
 from ctypes import windll
 from entity.test import test
@@ -26,5 +27,8 @@ class MyApplication(tk.Tk):
 if __name__ == '__main__':
     # while True:
     #     mG_p4.pick()
-    app = MyApplication()
-    app.mainloop()
+
+    yes = messagebox.askyesno(title='Think Twice', message='Start Test?')
+    if yes:
+        app = MyApplication()
+        app.mainloop()
