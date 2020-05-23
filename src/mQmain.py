@@ -13,6 +13,10 @@ class MyApplication(tk.Tk):
         super().__init__(*args, **kwargs)
         windll.shcore.SetProcessDpiAwareness(1)
         
+        yes = messagebox.askyesno(title='Think Twice', message='Start Test?')
+        if not yes:
+            self.destroy()
+            return
         self.title("Math is Fun")
         self.geometry("1024x1024")   
             
@@ -28,7 +32,6 @@ if __name__ == '__main__':
     # while True:
     #     mG_p4.pick()
 
-    yes = messagebox.askyesno(title='Think Twice', message='Start Test?')
-    if yes:
-        app = MyApplication()
-        app.mainloop()
+   
+    app = MyApplication()
+    app.mainloop()
