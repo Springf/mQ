@@ -14,7 +14,7 @@ class MyApplication(tk.Tk):
         windll.shcore.SetProcessDpiAwareness(1)
         
         self.title("Math is Fun")
-        self.geometry("1024x1024")   
+        self.geometry("1080x1024")   
         
         self.lower()
         yes = messagebox.askyesno(parent=self, title='Think Twice', message='Start Test?')

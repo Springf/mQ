@@ -86,7 +86,7 @@ class mView(tk.Frame):
         self.question_body_frame = tk.LabelFrame(self, font=("Calibri", 32))
         self.question_body = tk.StringVar()
         question_body_label = tk.Label(self.question_body_frame, textvariable=self.question_body, font=(
-            "Calibri", 48), wraplength=800)
+            "Calibri", 48), wraplength=1000)
         self.answer_frame = tk.LabelFrame(self, font=("Calibri", 32))
         self.answer = tk.StringVar()
         answer_entry = tk.Entry(self.answer_frame, textvariable=self.answer, font=("Calibri", 32))
