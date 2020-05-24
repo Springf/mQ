@@ -5,6 +5,7 @@ import config
 import sqlite3
 from entity.test import test
 
+
 class mView(tk.Frame):
     """A friendly little module"""
 
@@ -14,7 +15,6 @@ class mView(tk.Frame):
         self.root.protocol("WM_DELETE_WINDOW", self.close) 
         self.conn = sqlite3.connect(config.DATABASE_CONFIG['dbname'])
 
-        
 
         self.test = test
         self.test.save_test(self.conn)
@@ -29,6 +29,7 @@ class mView(tk.Frame):
         
     def update_answer(self):
         time_spent = self.last_time-self.time
+        self.last_time = self.time
         answer = self.answer.get()
         correct = self.question.test_answer(answer)
         self.results.append((self.question, answer, correct))

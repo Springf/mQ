@@ -6,7 +6,7 @@ from fractions import Fraction
 # collection of arithmatic questions for Primary 4
 
 picker = ('decimal_add', 'decimal_minus', 'decimal_multiply',
-          'decimal_divide', 'faction_add', 'faction_minus')
+          'decimal_divide', 'faction_add', 'faction_minus', 'faction_add_minus')
 level = 4
 
 def pick():
@@ -73,4 +73,12 @@ def faction_minus():
         n2 = tmp
     ans = n1 - n2
     q = question(None, f'{n1} - {n2} =', f'{ans}', 'fraction', level, 'Express your answer in Simplified Fraction')
+    return q
+
+def faction_add_minus():
+    n1 = Fraction(randint(2, 6), randint(6, 12))
+    n2 = Fraction(randint(3, 9), randint(9, 15))
+    n3 = Fraction(randint(1, 4), randint(10, 15))
+    ans = n1 + n2 - n3
+    q = question(None, f'{n1} + {n2} - {n3} =', f'{ans}', 'fraction', level, 'Express your answer in Simplified Fraction')
     return q

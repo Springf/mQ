@@ -34,6 +34,9 @@ class question:
     def get_body(self):
         if self.variable is not None:
             return self.body.format(*self.variable)
+            #todo optimize
+        if self.answer_type != 'fraction':
+            return self.body.replace('/', '÷')
         return self.body
 
     def test_answer(self, answer):

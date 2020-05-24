@@ -26,18 +26,9 @@ def gen_rand_int(whole):
     max = 10 ** (whole + 1)
     return randint(min+1, max+1)
 
-# def gen_rand_pair(operator)
-#     x = gen_rand_int(2)
-#     y = gen_rand_int(1)
-#     return f'{x}{operator}{y}'
-
-
-# def gen_rand_pair_wp(operator)
-#     return f'({gen_rand_pair()})'
-
 def recur_gen_rand_equation(p):
     if p == 1:
-        return f'{gen_rand_int(1)}'
+        return f'Decimal("{gen_rand_decimal(1,1)}"))'
     operator = operators[randint(0,3)]
     if operator == '+':
         n1 = gen_rand_int(1)
@@ -45,12 +36,13 @@ def recur_gen_rand_equation(p):
         return f'{n1}+{n2}'
     elif operator == '-':
         n1 = gen_rand_int(0)
-        n2 = eval(recur_gen_rand_equation(p-1))
-        if n1 < n2:
-            tmp = n1
-            n1 = n2
-            n2 = tmp
-        return f'{n1}-{n2}'
+        s = recur_gen_rand_equation(p-1)
+        n2 = eval(s)
+        if n1 == n2:
+            n1 = n1 + 11
+        elif n1 < n2:
+            return f'{s}-{n1}'   
+        return f'{n1}-{s}'
     elif operator == '*':
         n1 = gen_rand_int(0)
         n2 = recur_gen_rand_equation(p-1)
@@ -60,13 +52,15 @@ def recur_gen_rand_equation(p):
     elif operator == '/':
         ans = gen_rand_int(0)
         n1 = recur_gen_rand_equation(p-1)
-        n2 = eval(f'{n1}') * ans
+        print(f'n1={n1}')
+        n2 = Decimal(f"eval(f'{n1}') * ans")
         if p>2:
             return f'{n2}/({n1})'
         return f'{n2}/{n1}'
 
 def gen_rand_equation(p):
     eq = recur_gen_rand_equation(p)
+    print(eq)
     ans = eval(eq)
     q = question(None, f'{eq}=', f'{ans}', 'decimal', 5, 'Express your answer in Number')
     return q

@@ -13,14 +13,16 @@ class MyApplication(tk.Tk):
         super().__init__(*args, **kwargs)
         windll.shcore.SetProcessDpiAwareness(1)
         
-        yes = messagebox.askyesno(title='Think Twice', message='Start Test?')
+        self.title("Math is Fun")
+        self.geometry("1024x1024")   
+        
+        self.lower()
+        yes = messagebox.askyesno(parent=self, title='Think Twice', message='Start Test?')
         if not yes:
             self.destroy()
             return
-        self.title("Math is Fun")
-        self.geometry("1024x1024")   
-            
-        new_test = test(getpass.getuser(), 4, 30, 1200)
+        self.focus_set()
+        new_test = test(getpass.getuser(), 4, 30, 16)
         mv = mView(self, new_test)
 
         #mv.grid(sticky=(tk.E + tk.W + tk.N + tk.S))
