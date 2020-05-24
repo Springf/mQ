@@ -22,7 +22,7 @@ class MyApplication(tk.Tk):
             self.destroy()
             return
         self.focus_set()
-        new_test = test(getpass.getuser(), 4, 30, 16)
+        new_test = test(getpass.getuser(), 4, 30, 1080)
         mv = mView(self, new_test)
 
         #mv.grid(sticky=(tk.E + tk.W + tk.N + tk.S))
@@ -31,9 +31,6 @@ class MyApplication(tk.Tk):
 
 
 if __name__ == '__main__':
-    # while True:
-    #     mG_p4.pick()
 
-   
     app = MyApplication()
     app.mainloop()

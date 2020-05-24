@@ -13,7 +13,7 @@ class mView(tk.Frame):
         super().__init__(parent)
         self.root = parent
         self.root.protocol("WM_DELETE_WINDOW", self.close) 
-        self.conn = sqlite3.connect(config.DATABASE_CONFIG['dbname'])
+        self.conn = sqlite3.connect(config.DATABASE_CONFIG['dbname'], check_same_thread=False)
 
 
         self.test = test
